@@ -5,6 +5,10 @@ const server = http.createServer((req, res) => {
     const url = req.url;
 
     if (url === '/') {
+        if(req.method !== 'GET'){
+            res.writeHead(405, {'Content-Type': 'text/plain'});
+            return res.end(`${req.method} is not allowed for the request NODEJS`);
+        }
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.write('Welcome to the Home Page');
         res.write('\nThis is the second line on the home page.');
