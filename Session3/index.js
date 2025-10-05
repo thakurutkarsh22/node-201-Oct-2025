@@ -1,13 +1,14 @@
-// npm init creates a package.json file
-// npm i express installs express and adds it to dependencies in package.json
-
-
 const express = require('express');
 const { HomeResponse, AboutsResponse, ContactsResponse } = require('./Controllers/HomeController');
-const HomeRoute = require('./Routes/HomeRoute');
 const ActivityRoute = require('./Routes/ActivityRoute');
 const server = express();
-const PORT = 8089;
+const dotEnv = require('dotenv');
+
+// .config() will load all the variables from .env file to process.env
+dotEnv.config();
+
+
+const PORT = process.env.SERVER_PORT;
 
 
 // HANDLERS : handles the request and response

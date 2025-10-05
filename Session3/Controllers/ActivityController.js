@@ -1,7 +1,7 @@
 const userData = require("../userData");
 
 function GetAllUsers (req, res) {
-    const usersData = userData.data;
+   const usersData = userData.data;
     res.json({data: usersData, size: usersData.length});
 }
 
@@ -19,6 +19,7 @@ function GetUserByGender (req, res) {
 
     const filteredData = userData.data.filter((user) => user.gender === queriedGender);
     res.json({data: filteredData, size: filteredData.length});
+    
 }
 
 module.exports = {GetAllUsers, GetUserByFirstName, GetUserByGender};
