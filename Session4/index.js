@@ -3,6 +3,7 @@ const { HomeResponse, AboutsResponse, ContactsResponse } = require('./Controller
 const ActivityRoute = require('./Routes/ActivityRoute');
 const server = express();
 const dotEnv = require('dotenv');
+const mongoose = require('mongoose');
 
 // .config() will load all the variables from .env file to process.env
 dotEnv.config();
@@ -49,6 +50,15 @@ server.get("api/v1/fitness", (req, res) => {
 // use allows all types of requests GET, POST, DELETE, PUT, PATCH
 server.use("/api/v1/activity", ActivityRoute)
 
+const mongoURL = process.env.MONGODB_URL;
+
+mongoose.connect(mongoURL)
+.then(() => {
+    console.log('MongoDB connected successfully!');
+})
+.catch((err) => {
+    console.error('MongoDB connection error:', err);
+});
 
 server.listen(PORT, () => {
     console.log(`EXPRESS Server is running on port !! ${PORT}`);
