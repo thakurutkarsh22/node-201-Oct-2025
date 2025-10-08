@@ -1,6 +1,7 @@
 const express = require('express');
 const { HomeResponse, AboutsResponse, ContactsResponse } = require('./Controllers/HomeController');
 const ActivityRoute = require('./Routes/ActivityRoute');
+const BlogRoute = require('./Routes/BlogRoute');
 const server = express();
 const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
@@ -10,6 +11,8 @@ dotEnv.config();
 
 
 const PORT = process.env.SERVER_PORT;
+
+server.use(express.json()); // to parse the incoming request body as JSON
 
 
 // HANDLERS : handles the request and response
@@ -43,12 +46,12 @@ server.get("api/v1/fitness", (req, res) => {
     
 });
 
-
-
 // --------- ACTIVITIES -----------
-
-// use allows all types of requests GET, POST, DELETE, PUT, PATCH
 server.use("/api/v1/activity", ActivityRoute)
+
+
+// Blogs 
+server.use("/api/v1/blogs", BlogRoute);
 
 const mongoURL = process.env.MONGODB_URL;
 
