@@ -1,19 +1,13 @@
 const BlogModel = require("../Models/BlogsModel");
+const BlogsService = require("../Service/BlogsService");
 
 async function createNewBlog(req, res) {
     const body = req.body;
     const {title, content, author} = body;
-    
-    // Here we have to create an object of Blog
-    const blogObject = new BlogModel({
-        title,
-        content,
-        author
-    });
 
     // save this object to database
     try {
-        const response = await blogObject.save();
+        const response = await BlogsService.createBlog(title, content, author);
         res.status(201).json({
             message: "Blog created successfully",
             data: response

@@ -5,7 +5,7 @@ const blogSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            unique: true, // if this is good or bad ? 
+            unique: true, // if this is good or bad ? BAD for big data 
             required: true,
             trim: true,
             minlength: 3,
@@ -43,3 +43,6 @@ const blogSchema = new mongoose.Schema(
 const BlogModel = mongoose.model('Blog', blogSchema);
 
 module.exports = BlogModel;
+
+
+// Bloom filter - is used as a data structure to check whether an element is present in a set or not.

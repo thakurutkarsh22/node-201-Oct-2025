@@ -1,9 +1,10 @@
 const express = require('express');
 const { createNewBlog, getAllBlogs, getBlogById, deleteBlogById } = require('../Controllers/BlogsController');
+const BLogInputValidationMiddleware = require('../Middleware/BLogInputValidationMiddleware');
 const router = express.Router();
 
 
-router.post("/createNewBlog", createNewBlog);
+router.post("/createNewBlog", BLogInputValidationMiddleware, createNewBlog);
 router.get("/getAllBlogs", getAllBlogs);
 router.get("/getBlogById/:blogId", getBlogById);
 router.delete("/deleteBlogById/:blogId", deleteBlogById);
