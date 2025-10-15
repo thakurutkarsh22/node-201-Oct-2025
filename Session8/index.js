@@ -2,6 +2,8 @@ const express = require('express');
 const { HomeResponse, AboutsResponse, ContactsResponse } = require('./Controllers/HomeController');
 const ActivityRoute = require('./Routes/ActivityRoute');
 const BlogRoute = require('./Routes/BlogRoute');
+const AuthRoute = require('./Routes/AuthRoute');
+
 const server = express();
 const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
@@ -52,6 +54,10 @@ server.use("/api/v1/activity", ActivityRoute)
 
 // Blogs 
 server.use("/api/v1/blogs", BlogRoute);
+
+// AuthRoute
+
+server.use("/api/v1/auth", AuthRoute);
 
 const mongoURL = process.env.MONGODB_URL;
 
