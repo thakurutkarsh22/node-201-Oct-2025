@@ -1,6 +1,7 @@
-// /Users/uthakur/Desktop/GitHub/node-201-Oct-2025/Session8/Service/AuthService.js
 const bcrypt = require('bcrypt');
 const UserModel = require("../Models/UserModel");
+const jwt = require('jsonwebtoken');
+const { JWT_SECRET_KEY } = require('../Middleware/AuthMiddlewareJwt');
 
 class AuthService {
 
@@ -45,7 +46,12 @@ class AuthService {
                 const plainTextPassword = password; // PLAIN TEXT
                 const isPasswordMatch = await bcrypt.compare(plainTextPassword, encryptedPassword);
                 if (isPasswordMatch) {
-                    return user;
+                    // we find user and its password matches
+                    const jwtToken = jwt.sign({username: user.username, email: user.email, nationality: "Indian" },JWT_SECRET_KEY, {
+                        expiresIn: '10000ms' // 10s token expiry
+                    });
+                    console.log("Generated JWT Token: ", jwtToken);
+                    return {user, token: jwtToken};
                 } else {
                     throw new Error("Invalid credentials");
                 }
