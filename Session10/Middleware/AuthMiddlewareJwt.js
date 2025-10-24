@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 
 function AuthMiddlewareJwt (req, res, next) {
+    console.log("AuthMiddlewareJwt called - protecting the route");
     const headers = req.headers;
     const authorization = headers.authorization;
     if(!authorization) {

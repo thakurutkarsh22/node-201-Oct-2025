@@ -4,8 +4,12 @@ const AuthMiddleware = require('../Middleware/AuthMiddleware');
 const { AuthMiddlewareJwt } = require('../Middleware/AuthMiddlewareJwt');
 const router = express.Router();
 
+const passport = require('passport');
+const AuthMiddlewarePassportJwt = passport.authenticate('jwt', 
+    { session: false, failureRedirect: '/login' });
 
-router.get("/users",AuthMiddlewareJwt, GetAllUsers);
+
+router.get("/users",AuthMiddlewarePassportJwt, GetAllUsers);
 
 router.get("/users/search",AuthMiddlewareJwt, GetUserByGender); 
 

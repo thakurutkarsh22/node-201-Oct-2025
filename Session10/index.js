@@ -3,10 +3,14 @@ const { HomeResponse, AboutsResponse, ContactsResponse } = require('./Controller
 const ActivityRoute = require('./Routes/ActivityRoute');
 const BlogRoute = require('./Routes/BlogRoute');
 const AuthRoute = require('./Routes/AuthRoute');
+const configurePassport = require('./Config/Passport');
+const passport = require('passport');
 
 const server = express();
 const dotEnv = require('dotenv');
 const mongoose = require('mongoose');
+
+configurePassport(passport);
 
 // .config() will load all the variables from .env file to process.env
 dotEnv.config();
